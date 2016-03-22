@@ -1,0 +1,17 @@
+{
+  "name": "basic-html5",
+  "version": "1.0.0",
+  "description": "Basic html5 project scaffolding using gulp and sass",
+  "main": "gulpfile.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "scaffolding",
+    "html5",
+    "sass",
+    "not-boilerplate"
+  ],
+  "author": "EduardoArnold",
+  "license": "MIT"
+}
