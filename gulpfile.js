@@ -28,4 +28,5 @@ gulp.task('lint:eslint', () => {
       console.log('Total Warnings: ' + results.warningCount);
       console.log('Total Errors: ' + results.errorCount);
     }));
+
 });
