@@ -1,24 +1,24 @@
 'use strict';
 
-var gulp = require('gulp');
-var gutil = require('gulp-util');
+const gulp = require('gulp');
+const gutil = require('gulp-util');
 
-var webpack = require("webpack");
-var WebpackDevServer = require("webpack-dev-server");
-var webpackConfig = require("./webpack.config.js");
+const webpack = require("webpack");
+const WebpackDevServer = require("webpack-dev-server");
+const webpackConfig = require("./webpack.config.js");
 
 gulp.task('default', () => {
   gutil.log('Gulp Running');
 });
 
+gulp.task("webpack:build", (callback) => {
+  'use strict';
 
-gulp.task("webpack:build", function(callback) {
-	// modify some webpack config options
-	var myConfig = Object.create(webpackConfig);
-	myConfig.plugins = myConfig.plugins.concat(
+	let buildConfig = Object.create(webpackConfig);
+
+	buildConfig.plugins = buildConfig.plugins.concat(
 		new webpack.DefinePlugin({
 			"process.env": {
-				// This has effect on the react lib size
 				"NODE_ENV": JSON.stringify("production")
 			}
 		}),
@@ -26,12 +26,36 @@ gulp.task("webpack:build", function(callback) {
 		new webpack.optimize.UglifyJsPlugin()
 	);
 
-	// run webpack
-	webpack(myConfig, function(err, stats) {
-		if(err) throw new gutil.PluginError("webpack:build", err);
+	webpack(buildConfig, (err, stats) => {
+    if (err) {
+      throw new gutil.PluginError("webpack:build", err);
+    }
+
 		gutil.log("[webpack:build]", stats.toString({
 			colors: true
 		}));
+
+		callback();
+	});
+});
+
+
+gulp.task("webpack:build-debug", (callback) => {
+  let debugConfig = Object.create(webpackConfig);
+  debugConfig.devtool = "sourcemap";
+  debugConfig.debug = true;
+
+  let debugCompiler = webpack(debugConfig);
+
+	debugCompiler.run((err, stats) => {
+    if (err) {
+      throw new gutil.PluginError("webpack:build-dev", err);
+    }
+
+		gutil.log("[webpack:build-dev]", stats.toString({
+			colors: true
+		}));
+
 		callback();
 	});
 });
