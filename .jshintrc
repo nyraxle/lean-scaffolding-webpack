@@ -1,0 +1,13 @@
+{
+  "maxerr": 1,
+  "bitwise": true,
+  "curly": true,
+  "latedef": true,
+  "undef": true,
+  "unused": true,
+  "stric": true,
+  "maxparams": 3,
+  "maxdepth": 3,
+  "maxcomplexity": 6,
+  "maxlen": 130,
+}
