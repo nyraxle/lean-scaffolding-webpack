@@ -13,5 +13,9 @@
     "not-boilerplate"
   ],
   "author": "EduardoArnold",
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-util": "^3.0.7"
+  }
 }
