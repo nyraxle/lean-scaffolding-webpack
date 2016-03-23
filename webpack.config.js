@@ -6,9 +6,9 @@ module.exports = {
 	cache: true,
 	entry: './src/js/entry.js',
 	output: {
-    path: path.join(__dirname, 'build/js'),
+    path: path.join(__dirname, 'dist/'),
     filename: 'bundle.js',
-		publicPath: "build/"
+		publicPath: "dist/"
 	},
 	module: {
     loaders: [
