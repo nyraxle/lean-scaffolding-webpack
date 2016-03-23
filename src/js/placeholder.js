@@ -8,4 +8,4 @@ class Placeholder {
   }
 }
 
-export default Placeholder
+export default Placeholder;
