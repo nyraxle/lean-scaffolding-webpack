@@ -38,10 +38,10 @@ gulp.task('lint:eslint', (callback) => {
     .pipe(eslint())
     .pipe(eslint.format())
     .pipe(eslint.result((result) => {
-      let fileLog = gutil.colors.blue('ESLint for file:', result.filePath);
-      let messageLog = gutil.colors.white.underline('# Messages:', result.messages.length);
-      let warningLog = gutil.colors.white.underline('# Warnings:', result.warningCount);
-      let errorLog = gutil.colors.white.underline('# Errors:', result.errorCount);
+      let fileLog = chalk.blue('ESLint for file:', result.filePath);
+      let messageLog = chalk.bold.gray(' #Messages:', result.messages.length);
+      let warningLog = chalk.bold.yellow(' #Warnings:', result.warningCount);
+      let errorLog = chalk.bold.red(' #Errors:', result.errorCount);
       gutil.log(fileLog + messageLog + warningLog + errorLog);
     }));
 });
