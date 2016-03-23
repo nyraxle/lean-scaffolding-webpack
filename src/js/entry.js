@@ -1,4 +1,4 @@
-import Placeholder from './Placeholder.js';
+import Placeholder from './placeholder.js';
 
 let placeholder = new Placeholder('placeholder', 'entryjs');
 
