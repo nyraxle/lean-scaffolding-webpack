@@ -2,6 +2,8 @@
 
 const express = require('express');
 const path = require('path');
+const chalk = require('chalk');
+const util = require('util');
 const app = express();
 
 app.use(express.static(path.resolve('dist')));
@@ -11,6 +13,7 @@ app.get('*', (req, res) => {
 });
 
 // Server Initialization
-var port = process.env.PORT || 9000;
-console.log('Application listen on localhost:'+port);
+let port = process.env.PORT || 9000;
+let message = chalk.bold.green('Application listening on localhost:',port)
+util.log(message);
 app.listen(port);

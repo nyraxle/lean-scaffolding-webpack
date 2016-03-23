@@ -11,7 +11,9 @@ const webpackConfig = require('./webpack.config.js');
 
 const eslint = require('gulp-eslint');
 const plumber = require('gulp-plumber');
+const nodemon = require('gulp-nodemon');
 
+// Source Paths
 const paths = {
   source: './src/',
   dist: './dist'
@@ -19,19 +21,21 @@ const paths = {
 paths.srcJS = paths.source + 'js/**/*.js';
 paths.src = paths.source + '/**/*.*';
 
-let errorHandler = function (error) {
+// Error Handlers
+var errorHandler = function (error) {
   let taskMessage = chalk.bold.red('Task Finished With Errors:',error.name,' with',error.message);
   this.emit('end');
 };
 
+// Watchers
+var watchSourceBuildProduction = gulp.watch(paths.src, ['webpack:build']);
+var watchSourceBuildDebug = gulp.watch(paths.src, ['lint:eslint', 'webpack:build-debug']);
 
 gulp.task('default', () => {
-  gulp.watch(paths.src, ['lint:eslint', 'webpack:build-debug']);
+  watchSourceBuildProduction;
 });
 
-/*
-  Lint
-*/
+// Lint
 gulp.task('lint:eslint', (callback) => {
   return gulp.src(paths.srcJS)
     .pipe(plumber({ errorHandler: errorHandler }))
@@ -46,9 +50,7 @@ gulp.task('lint:eslint', (callback) => {
     }));
 });
 
-/*
-  WebPack
-*/
+// WebPack
 gulp.task('webpack:build', ['lint:eslint'], (callback) => {
   'use strict';
 
@@ -96,4 +98,18 @@ gulp.task('webpack:build-debug', (callback) => {
 
 		callback();
 	});
+});
+
+// Nodemon - start server with build-dev and jslint
+gulp.task('nodemon', (callback) => {
+  nodemon({
+    script: 'server.js',
+    ext: 'js',
+    env: {
+      'NODE_ENV': 'development'
+    }
+  })
+  .on('start', watchSourceBuildDebug)
+  .on('change', watchSourceBuildDebug)
+  .on('restart', watchSourceBuildDebug);
 });
