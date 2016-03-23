@@ -2,7 +2,7 @@
   "name": "basic-html5",
   "version": "1.0.0",
   "description": "Basic html5 project scaffolding using gulp and sass",
-  "main": "gulpfile.js",
+  "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -27,5 +27,8 @@
     "webpack": "^1.12.14",
     "webpack-dev-server": "^1.14.1",
     "webpack-stream": "^3.1.0"
+  },
+  "dependencies": {
+    "express": "^4.13.4"
   }
 }

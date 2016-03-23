@@ -1,6 +1,10 @@
 class Placeholder {
-  toString() {
-    return 'Default file to test export, gulp and babel configurations';
+  constructor() {
+    this._date = new Date();
+  }
+
+  get date() {
+    return new Date(Date.UTC(this._date.getUTCFullYear(), this._date.getUTCMonth(), this._date.getUTCDate()));
   }
 }
 
