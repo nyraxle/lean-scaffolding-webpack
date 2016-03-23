@@ -1,5 +1,7 @@
 'use strict';
 
+const chalk = require('chalk');
+
 const gulp = require('gulp');
 const gutil = require('gulp-util');
 
