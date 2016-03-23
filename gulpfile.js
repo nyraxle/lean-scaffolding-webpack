@@ -10,16 +10,23 @@ const WebpackDevServer = require('webpack-dev-server');
 const webpackConfig = require('./webpack.config.js');
 
 const eslint = require('gulp-eslint');
+const plumber = require('gulp-plumber');
 
 const paths = {
   source: './src/',
   dist: './dist'
 };
 paths.srcJS = paths.source + 'js/**/*.js';
+paths.src = paths.source + '/**/*.*';
+
+let errorHandler = function (error) {
+  let taskMessage = chalk.bold.red('Task Finished With Errors:',error.name,' with',error.message);
+  this.emit('end');
+};
 
 
 gulp.task('default', () => {
-  gutil.log('Gulp Running');
+  gulp.watch(paths.src, ['lint:eslint', 'webpack:build-debug']);
 });
 
 /*
@@ -27,14 +34,14 @@ gulp.task('default', () => {
 */
 gulp.task('lint:eslint', (callback) => {
   return gulp.src(paths.srcJS)
+    .pipe(plumber({ errorHandler: errorHandler }))
     .pipe(eslint())
     .pipe(eslint.format())
-    .pipe(eslint.failAfterError())
     .pipe(eslint.result((result) => {
-      var fileLog = gutil.colors.blue('ESLint for file:', result.filePath);
-      var messageLog = gutil.colors.white.underline('# Messages:', result.messages.length);
-      var warningLog = gutil.colors.white.underline('# Warnings:', result.warningCount);
-      var errorLog = gutil.colors.white.underline('# Errors:', result.errorCount);
+      let fileLog = gutil.colors.blue('ESLint for file:', result.filePath);
+      let messageLog = gutil.colors.white.underline('# Messages:', result.messages.length);
+      let warningLog = gutil.colors.white.underline('# Warnings:', result.warningCount);
+      let errorLog = gutil.colors.white.underline('# Errors:', result.errorCount);
       gutil.log(fileLog + messageLog + warningLog + errorLog);
     }));
 });
