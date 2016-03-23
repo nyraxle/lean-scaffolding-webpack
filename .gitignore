@@ -1,5 +1,5 @@
 # Specific project structure folders to ignore #
-/build
+/dist
 /vendor
 
 # Created by https://www.gitignore.io/api/node,sublimetext,sass,windows,linux,osx
