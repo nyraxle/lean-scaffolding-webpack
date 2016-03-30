@@ -11,7 +11,6 @@ const webpackConfig = require('./webpack.config.js');
 
 const eslint = require('gulp-eslint');
 const plumber = require('gulp-plumber');
-const nodemon = require('gulp-nodemon');
 
 // Source Paths
 const paths = {
