@@ -26,10 +26,8 @@ var errorHandler = function (error) {
   this.emit('end');
 };
 
-// Watchers
-
-gulp.task('default', () => {
-});
+// Tasks
+gulp.task('default', ['webpack:build']);
 
 // Lint
 gulp.task('lint:eslint', (callback) => {
@@ -47,6 +45,7 @@ gulp.task('lint:eslint', (callback) => {
 });
 
 // WebPack
+// Build without sourcemaps
 gulp.task('webpack:build', ['lint:eslint'], (callback) => {
   'use strict';
 
@@ -75,7 +74,7 @@ gulp.task('webpack:build', ['lint:eslint'], (callback) => {
 	});
 });
 
-
+// Build with sourcemaps
 gulp.task('webpack:build-debug', (callback) => {
   let debugConfig = Object.create(webpackConfig);
   debugConfig.devtool = 'sourcemap';
