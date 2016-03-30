@@ -6,8 +6,8 @@ module.exports = {
 	cache: true,
 	entry: './src/js/entry.js',
 	output: {
-    path: path.join(__dirname, 'dist/'),
-		publicPath: "www/dist/",
+    path: path.join(__dirname, 'www/dist/'),
+		publicPath: ".www/",
     filename: 'bundle.js'
 	},
 	module: {
