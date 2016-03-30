@@ -99,17 +99,3 @@ gulp.task('webpack:build-debug', (callback) => {
 		callback();
 	});
 });
-
-// Nodemon - start server with build-dev and jslint
-gulp.task('nodemon', (callback) => {
-  nodemon({
-    script: 'server.js',
-    ext: 'js',
-    env: {
-      'NODE_ENV': 'development'
-    }
-  })
-  .on('start', watchSourceBuildDebug)
-  .on('change', watchSourceBuildDebug)
-  .on('restart', watchSourceBuildDebug);
-});
