@@ -8,4 +8,5 @@ class Placeholder {
   }
 }
 
+
 export default Placeholder;

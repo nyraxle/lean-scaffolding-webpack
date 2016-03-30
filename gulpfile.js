@@ -11,7 +11,6 @@ const webpackConfig = require('./webpack.config.js');
 
 const eslint = require('gulp-eslint');
 const plumber = require('gulp-plumber');
-const nodemon = require('gulp-nodemon');
 
 // Source Paths
 const paths = {
@@ -27,13 +26,8 @@ var errorHandler = function (error) {
   this.emit('end');
 };
 
-// Watchers
-var watchSourceBuildProduction = gulp.watch(paths.src, ['webpack:build']);
-var watchSourceBuildDebug = gulp.watch(paths.src, ['lint:eslint', 'webpack:build-debug']);
-
-gulp.task('default', () => {
-  watchSourceBuildProduction;
-});
+// Tasks
+gulp.task('default', ['webpack:build']);
 
 // Lint
 gulp.task('lint:eslint', (callback) => {
@@ -51,6 +45,7 @@ gulp.task('lint:eslint', (callback) => {
 });
 
 // WebPack
+// Build without sourcemaps
 gulp.task('webpack:build', ['lint:eslint'], (callback) => {
   'use strict';
 
@@ -79,7 +74,7 @@ gulp.task('webpack:build', ['lint:eslint'], (callback) => {
 	});
 });
 
-
+// Build with sourcemaps
 gulp.task('webpack:build-debug', (callback) => {
   let debugConfig = Object.create(webpackConfig);
   debugConfig.devtool = 'sourcemap';
@@ -98,18 +93,4 @@ gulp.task('webpack:build-debug', (callback) => {
 
 		callback();
 	});
-});
-
-// Nodemon - start server with build-dev and jslint
-gulp.task('nodemon', (callback) => {
-  nodemon({
-    script: 'server.js',
-    ext: 'js',
-    env: {
-      'NODE_ENV': 'development'
-    }
-  })
-  .on('start', watchSourceBuildDebug)
-  .on('change', watchSourceBuildDebug)
-  .on('restart', watchSourceBuildDebug);
 });
