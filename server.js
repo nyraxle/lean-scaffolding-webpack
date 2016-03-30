@@ -9,7 +9,7 @@ const app = express();
 app.use(express.static(path.resolve('dist')));
 
 app.get('*', (req, res) => {
-  res.sendFile(path.resolve('index.html'));
+  res.sendFile(path.resolve('www/index.html'));
 });
 
 // Server Initialization
