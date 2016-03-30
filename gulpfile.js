@@ -28,11 +28,8 @@ var errorHandler = function (error) {
 };
 
 // Watchers
-var watchSourceBuildProduction = gulp.watch(paths.src, ['webpack:build']);
-var watchSourceBuildDebug = gulp.watch(paths.src, ['lint:eslint', 'webpack:build-debug']);
 
 gulp.task('default', () => {
-  watchSourceBuildProduction;
 });
 
 // Lint
