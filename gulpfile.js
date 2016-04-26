@@ -75,7 +75,7 @@ gulp.task('webpack:build', ['lint:eslint'], (callback) => {
 });
 
 // Build with sourcemaps
-gulp.task('webpack:build-debug', (callback) => {
+gulp.task('webpack:build-dev', (callback) => {
   let debugConfig = Object.create(webpackConfig);
   debugConfig.devtool = 'sourcemap';
   debugConfig.debug = true;
