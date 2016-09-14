@@ -4,7 +4,8 @@
   "description": "Basic html5 project scaffolding using gulp and sass",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "webpack --watch -dev"
   },
   "keywords": [
     "scaffolding",
